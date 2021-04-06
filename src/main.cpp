@@ -1,4 +1,5 @@
 
+#include "audio/audioManager.hpp"
 #include "camera.hpp"
 #include "light/directionalLight.hpp"
 #include "light/pointLight.hpp"
@@ -73,9 +74,13 @@ int main(int argc, char* argv[]) {
 
     renderer.addModel(sphere);
 
+    AudioManager audioManager;
+    audioManager.playMusic();
+
     auto last = std::chrono::steady_clock::now();
 
     bool quit = false;
+
 
     bool mouseDown = false;
     while (!quit) {
@@ -111,7 +116,10 @@ int main(int argc, char* argv[]) {
                     }
                 } else if (e.type == SDL_MOUSEBUTTONUP) {
                     mouseDown = false;
-                } else if (e.type == SDL_KEYUP) {
+                } else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_SPACE) {
+                    audioManager.pauseMusic();
+                } else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_1) {
+                    audioManager.playSound();
                 }
             }
 

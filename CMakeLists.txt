@@ -41,6 +41,7 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 
 # set the sources for the executable
 set(SOURCES 
+    src/audio/audioManager.cpp
     src/gl/shaderUtils.cpp
     src/gl/glObject.cpp
     src/camera.cpp
