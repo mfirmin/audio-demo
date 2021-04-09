@@ -1,6 +1,12 @@
 #pragma once
 
 #include <SDL2/SDL_mixer.h>
+#include <string>
+
+#include <AL/al.h>
+#include <AL/alc.h>
+
+struct WAV;
 
 class AudioManager {
     public:
@@ -20,10 +26,14 @@ class AudioManager {
 
         void playSound();
     private:
-        Mix_Music* primaryMusic = nullptr;
+        ALCdevice* outputDevice = nullptr;
+        ALCcontext* context = nullptr;
+        ALuint buffer;
 
-        Mix_Chunk* soundFX = nullptr;
+        ALuint source;
 
         void loadMusic();
         void loadSounds();
+
+        WAV loadWAV(std::string filename);
 };

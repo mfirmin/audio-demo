@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
     renderer.addModel(sphere);
 
     AudioManager audioManager;
-    audioManager.playMusic();
+    // audioManager.playMusic();
 
     auto last = std::chrono::steady_clock::now();
 
@@ -116,9 +116,10 @@ int main(int argc, char* argv[]) {
                     }
                 } else if (e.type == SDL_MOUSEBUTTONUP) {
                     mouseDown = false;
+                    audioManager.playSound();
                 } else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_SPACE) {
                     audioManager.pauseMusic();
-                } else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_1) {
+                } else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_1) {
                     audioManager.playSound();
                 }
             }

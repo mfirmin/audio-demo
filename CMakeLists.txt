@@ -4,7 +4,7 @@ project(demo)
 
 include(FindPkgConfig)
 
-pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
+# pkg_check_modules(SDL2_Mixer REQUIRED IMPORTED_TARGET SDL2_mixer)
 
 # cmake_policy(SET CMP0072 NEW)
 
@@ -27,10 +27,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/build)
 find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
+# find_package(OpenAL REQUIRED)
+
+set(OPENAL_INCLUDE_DIR "/usr/local/include/AL")
+set(OPENAL_LIBRARY "/usr/local/lib/libopenal.so")
 
 # add the include (header) directories for sdl2 and glew
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${GLEW_INCLUDE_DIRS})
+include_directories(${OPENAL_INCLUDE_DIR})
 include_directories(src include)
 
 # sld2 has some weird extra whitespace that breaks things?
@@ -66,4 +71,5 @@ add_executable(demo
 target_link_libraries(demo ${SDL2_LIBRARIES})
 target_link_libraries(demo ${FREETYPE_LIBRARIES})
 target_link_libraries(demo ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES})
-target_link_libraries(demo PkgConfig::SDL2_Mixer)
+target_link_libraries(demo ${OPENAL_LIBRARY})
+# target_link_libraries(demo PkgConfig::SDL2_Mixer)
